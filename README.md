@@ -1,6 +1,6 @@
 # 💻 GVSU x GRPS Hackathon Technical Information
 
-# Documentation
+### Documentation
 Reading documentation can be very helpful! Consider it a manual of how to use whatever object or software you are using.
 [Click here to see some documentation about Raspberry Pi!](https://www.raspberrypi.com/documentation/)
 
