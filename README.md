@@ -284,26 +284,28 @@ This is a very important step when making projects and using libraries.
 `source myenv/bin/activate`  Activates the virtual environment
 `pip install pi5neo`  Installs pi5neo within the virtual environment
 
-`from pi5neo import Pi5Neo`
-`import time`
+```
+from pi5neo import Pi5Neo
+import time
 
-`def rainbow_cycle(neo, delay=0.1):`
-    `colors = [`
-        `(255, 0, 0),`  # Red
-        `(255, 127, 0),`  # Orange
-        `(255, 255, 0),`  # Yellow
-        `(0, 255, 0),`  # Green
-        `(0, 0, 255),`  # Blue
-        `(75, 0, 130),`  # Indigo
-        `(148, 0, 211)`  # Violet
-    `]`
-    `for color in colors:`
-        `neo.fill_strip(*color)`
-        `neo.update_strip()`
-        `time.sleep(delay)`
+def rainbow_cycle(neo, delay=0.1):
+    colors = [
+        (255, 0, 0),  # Red
+        (255, 127, 0),  # Orange
+        (255, 255, 0),  # Yellow
+        (0, 255, 0),  # Green
+        (0, 0, 255),  # Blue
+        (75, 0, 130),  # Indigo
+        (148, 0, 211)  # Violet
+    ]
+    for color in colors:
+        neo.fill_strip(*color)
+        neo.update_strip()
+        time.sleep(delay)
 
-`neo = Pi5Neo('/dev/spidev0.0', 10, 800)`
-`rainbow_cycle(neo)`
+neo = Pi5Neo('/dev/spidev0.0', 10, 800)
+rainbow_cycle(neo)
+```
 
 ## I2C OLED:
 1. Enable I2C Interface:
