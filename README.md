@@ -4,6 +4,9 @@
 Reading documentation can be very helpful! Consider it a manual of how to use whatever object or software you are using.
 [Click here to see some documentation about Raspberry Pi!](https://www.raspberrypi.com/documentation/)
 
+**Some Useful Calculators:**
+[Online Conversion Calculators | DigiKey Electronics](https://www.digikey.com/en/resources/online-conversion-calculators)
+
 # ⚠️ Safety:
 **Safe Shutdown Procedures**
 Always follow proper shutdown procedures to protect the operating system and hardware.
@@ -24,12 +27,12 @@ Always follow proper shutdown procedures to protect the operating system and har
 - *Use Insulating Material:* Place the Raspberry Pi on a non-conductive surface (like wood, plastic, or an anti-static mat) while working.
   
 
-# Power Supply
+### Power Supply
 Power Supply Setting: 5.37v
 *Note: Turn the knob slowly until it clicks. Once it clicks, the voltage should start around 3V. Slowly continue turning the knob until it hits 5.37 volts.*
 
-### Commands to Know:
-# Setup Commands:
+## Commands to Know:
+### Setup Commands:
 `sudo apt update`
 `sudo apt upgrade`
 `sudo apt upgrade pip` (or pip3)
@@ -40,29 +43,39 @@ Navigate to Interface Options > I2C and enable it.
 Navigate to Interface Options > SPI and enable it.
 *end of setup commands*
 
-# Reboot: 
+### Reboot: 
 `sudo reboot`
 
-# Shut Down:
+### Shut Down:
 `sudo shutdown -h now`
 
-# Get into folder:
+### Get into folder:
 `cd /home/techshow1/Documents/TestCode/`
 or if you were already in "/home/techshow1” (This is where the terminal would typically start you if you ssh in.) you could just do `cd Documents` for example
 
-# Move up one folder:
+### Move up one folder:
 `cd ~/[folder name]`
 
-# Move Back to root (In this case "/home/techshow1”):
+### Move Back to root (In this case "/home/techshow1”):
 `cd ..`
 
-# List all files in Folder:
+### List all files in Folder:
 `ls`
 
-# Show Python Library Version:
+### Show Python Library Version:
 `pip show pigpio`
 
-### Create Virtual Environment:
+## General Terms:
+- **GPIO**: General-purpose input output, a pin that can either be read from or written to.
+- **GND**: Ground, which is just 0 volts in this context. You almost always want all GNDs connected between different components.
+- **Vcc**: Always positive and often referred to as the logic voltage or control voltage, the minimum voltage level that a pin must detect to register as high or "on" (1). On a Raspberry Pi, this is 3.3V, on some devices, this is 5V. Raspberry Pis regulate the 5V input down to 3.3V, this is why they have a 5V supply pin and a 3.3V supply pin.
+- **PWM**: Pulse-width modulation, this is how a simple dimming LED or a servo would be controlled.
+- **MOSI**: Master-Out Slave-In, used in I2C communication between devices.
+- **MISO**: Master-In Slave-Out, used in I2C communication between devices.
+- **Cathode**: The “negative” side of a component, like an LED.
+- **Anode**: The “positive” side of a component, like an LED.
+
+# Create Virtual Environment:
 A virtual environment (venv) is essentially a clean, isolated workspace for your Python project.
 
 Imagine you have two different projects:
@@ -71,46 +84,44 @@ Imagine you have two different projects:
 
 If you installed all packages in the same place, installing the new version for Project B would break Project A.
 
-The venv solves this by creating a separate, private box in your computer for each project. When you activate a venv, you ensure that any packages you install only exist inside that box, preventing any errors or side effects with your other projects or your main computer setup.
+The venv solves this by creating a separate, private box in your computer for each project. Consider your computer as a big box with mutiple smaller boxes inside of it. When you activate a venv, you ensure that any packages you install only exist inside that box, preventing any errors or side effects with your other projects (boxes) or your main computer setup.
 
 `python -m venv testVenv`
 *It will create this inside of whatever folder you’re in.*
 *"testVenv" can be replaced with whatever you want to name your virtual environment.*
 
-# Start Virtual Environment:
+## Start Virtual Environment:
+This is where you want to create that box so you don't mess with other projects. Using 'venv' in the commmand is calling the specific Python module that handles creating virtual environments.
 `source /home/techshow1/Documents/TestCode/testVenv/bin/activate`
 
-# Deactivate Virtual Environment:
+## Deactivate Virtual Environment:
 To deactivate and leave the venv, you must already be inside of the venv. Navigate back to the venv folder and run this command:
 `deactivate`
 
-# Where to create python files in a venv:
+## Where to create python files in a venv:
 You typically put them inside of the venv folder itself. In this example: "/home/techshow1/Documents/TestCode/testVenv”
 
 
-# Some Useful Calculators:
-[Online Conversion Calculators | DigiKey Electronics](https://www.digikey.com/en/resources/online-conversion-calculators)
-
-
-# General Terms:
-**GPIO**: General-purpose input output, a pin that can either be read from or written to.
-**GND**: Ground, which is just 0 volts in this context. You almost always want all GNDs connected between different components.
-**Vcc**: Always positive and often referred to as the logic voltage or control voltage, the minimum voltage level that a pin must detect to register as high or "on" (1). On a Raspberry Pi, this is 3.3V, on some devices, this is 5V. Raspberry Pis regulate the 5V input down to 3.3V, this is why they have a 5V supply pin and a 3.3V supply pin.
-**PWM**: Pulse-width modulation, this is how a simple dimming LED or a servo would be controlled.
-**MOSI**: Master-Out Slave-In, used in I2C communication between devices.
-**MISO**: Master-In Slave-Out, used in I2C communication between devices.
-**Cathode**: The “negative” side of a component, like an LED.
-**Anode**: The “positive” side of a component, like an LED.
-
 # Raspberry Pi Pinout:
+**GPIO Pins:** The majority of the pins are labeled GPIO followed by a number (e.g., GPIO 2, GPIO 17). These are the main programmable pins.
+
+They can be configured as inputs (to read signals from sensors, like detecting if a button is pressed) or outputs (to send signals to components, like turning on an LED).
+
+**Power Pins (VCC):** These pins supply electrical power to external components.
+- Pins 1 and 17 provide **3.3V** (volts) power.
+- Pins 2 and 4 provide **5V** power.
+
 ![alt text](rasp-pi-pinout.png)
+Many of these GPIO pins also have specialized functions (like I2C, SPI, UART, or PWM, noted in parentheses) which are used for more complex communication with specific types of devices.
 
 # Breadboard Diagram:
 All points with lines between them are connected, and will be of the same voltage. Typically the side “rails” are used to supply power and ground to components on the breadboard, where the red line is power and the blue line is ground. If using both sets of rails for the same voltages, they should be connected to the same line on the other side of the board.
 
 ![alt text](breadboard-diagram.png)
 
-# Button Diagram:
+## Button Diagram:
+**Reading the Input in Code**
+Since the switch only provides an electrical signal, you need a program (usually written in Python) to read and interpret that signal.
 
 ![alt text](button-diagram.png)
 
@@ -126,6 +137,25 @@ One side of the button is connected to GND, and one side is connected to the pin
 # Pull-up/Pull-down resistor:
 Inside the Raspberry Pi, there is a resistor that connects a GPIO pin to either 3.3V (pull-up) or GND (pull-down), preventing a short from happening when the button is pressed. If a short happens (GND is connected directly to power), a bunch of current flows, just like if you connect the two sides of a battery. Typically, internal pull-up resistors are used as described in the basic setup above, but note that if you use a pull-down resistor, which would connect the pin to GND when the button isn’t pressed, the button would have to have one side connected to power and the other connected to the pin you want to use, instead.
 
+Code example:
+`import RPi.GPIO as GPIO`
+`import time`
+
+`BUTTON_GPIO = 17` # Choose any available GPIO pin
+
+`GPIO.setmode(GPIO.BCM) # Use the Broadcom pin numbering scheme`
+  - Set the pin as an input and enable the internal PULL-UP resistor
+`GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)`
+
+`while True:`
+    # Read the state of the button
+    # Because we used a pull-up, the value is LOW (0) when pressed
+    `if GPIO.input(BUTTON_GPIO) == GPIO.LOW:`
+        `print("Button was pressed!")`
+    ``
+    `time.sleep(0.1)` # Wait a bit to prevent reading the button too many times
+
+Using the internal pull-up resistor is usually the simplest way to wire this switch to a Raspberry Pi, as it only requires connecting the switch between a GPIO input pin and a Ground (GND) pin.
 ![alt text](resistor.png)
 
 # LEDs:
