@@ -42,9 +42,20 @@ or if you were already in "/home/techshow1” (This is where the terminal would 
 # Show Python Library Version:
 `pip show pigpio`
 
-# Create Virtual Environment:
+### Create Virtual Environment:
+A virtual environment (venv) is essentially a clean, isolated workspace for your Python project.
+
+Imagine you have two different projects:
+- Project A needs an older version of a specific package (a tool).
+- Project B needs the newest version of that same package.
+
+If you installed all packages in the same place, installing the new version for Project B would break Project A.
+
+The venv solves this by creating a separate, private box in your computer for each project. When you activate a venv, you ensure that any packages you install only exist inside that box, preventing any errors or side effects with your other projects or your main computer setup.
+
 `python -m venv testVenv`
 *It will create this inside of whatever folder you’re in.*
+*"testVenv" can be replaced with whatever you want to name your virtual environment.*
 
 # Start Virtual Environment:
 `source /home/techshow1/Documents/TestCode/testVenv/bin/activate`
@@ -54,7 +65,6 @@ or if you were already in "/home/techshow1” (This is where the terminal would 
 
 # Where to create python files in a venv:
 You typically put them inside of the venv folder itself. In this example: "/home/techshow1/Documents/TestCode/testVenv”
-
 
 
 # Some Useful Calculators:
