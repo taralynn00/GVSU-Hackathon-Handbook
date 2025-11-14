@@ -396,7 +396,7 @@ with Image.new("1", device.size) as img:
 Here’s a different font type and size (20 is the size of the font in pixels):
 `ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 20)`
 
-# Scrolling Test Example:
+## Scrolling Test Example for I2C OLED:
 ```
 from luma.core.interface.serial import i2c
 from luma.oled.device import ssd1306
@@ -435,7 +435,7 @@ with Image.new("1", device.size) as img:
 ```
 
 
-# Putting Images on Device:
+## Putting Images on Device for I2C OLED:
 This takes an image, resizes it to fit the device, and uses dithering to convert a colored image to black and white. Note that the display has a resolution of 128x64 pixels, so if you don’t want the image to get distorted, you’ll have to make sure the image has a similar ratio.
 
 ```
@@ -459,14 +459,14 @@ while(True):
 ```
 
 
-## Audio and Microphone Setup
+# Audio and Microphone Setup
 
 The Raspberry Pi 5 has built-in support for USB audio devices through PulseAudio. We did not need to install any additional libraries — only to import subprocess and time.
 Instead of using the device’s interface name, we used “pulse” as the audio interface.
 
 There is also a script named test.py that can be used to verify both the audio output and the microphone input.
 
-# Testing the Microphone
+## Testing the Microphone
 To confirm that the microphone is working, use the following command in Terminal:
 `arecord -D pulse -f cd -d 3 test.wav`
 This records a **3-second audio clip** using the PulseAudio interface and saves it as test.wav in the current directory.
@@ -489,7 +489,7 @@ You can then play it back with:
 *(If not prompted, `run sudo reboot`.)*
 
 
-# Time Blurb about Time library
+## Time Blurb about Time library
 In programming, the time library is used to manage and measure time-related tasks. It provides access to the computer’s system clock, allowing you to track the current time, measure how long code takes to run, pause execution, and format or convert timestamps.
 
 Common options and functions include:
@@ -506,13 +506,13 @@ In sensor and indicator circuits, resistors limit current flow through component
 
 ![alt text](img/current-limiting.png)
 
-# Resistors
+## Resistors
 [Resistors explained simply!](https://www.youtube.com/watch?v=x6jajfprWZo)
 In Internet of Things (IoT) hardware design, resistors are among the most fundamental components ensuring that electronic subsystems operate within safe and predictable limits.
 
 They regulate the flow of current in mixed-signal circuits that interconnect sensors, actuators, and microcontrollers such as the Raspberry Pi or ESP32.
 
-## Key Takeaways
+### Key Takeaways
 - Resistors serve as the control backbone of IoT electronics, ensuring reliable data acquisition, safe operation, and efficient power management.
 - Their applications span from simple GPIO protection to advanced analog signal conditioning and power metering.
 - A deep understanding of resistor behavior under real-world electrical and environmental conditions empowers IoT developers to design resilient, scalable, and energy-aware systems.
@@ -530,7 +530,7 @@ They regulate the flow of current in mixed-signal circuits that interconnect sen
 
 - Within IoT systems, transistors are essential for power control, signal conditioning, and digital actuation, forming the foundation for embedded automation and sensor networks.
 
-# Structure and Basic Functionality
+### Structure and Basic Functionality
 - A transistor has three active terminals — the control terminal (Base in BJTs or Gate in MOSFETs), the input terminal (Collector or Drain), and the output terminal (Emitter or Source).
 
 - It uses a small input signal at the control terminal to modulate a larger output current through the other two terminals.
@@ -545,7 +545,7 @@ They regulate the flow of current in mixed-signal circuits that interconnect sen
 
 - Their switching speed, current gain, and power-handling capabilities vary by type — the correct selection depends on the IoT application’s voltage, current, and control requirements.
 
-# Key Takeaways
+### Key Takeaways
 - Transistors form the switching and amplification core of IoT device control systems.
 
 - They enable digital microcontrollers to operate safely across mixed-voltage environments while driving diverse electromechanical components.
