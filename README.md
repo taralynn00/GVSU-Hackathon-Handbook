@@ -128,32 +128,36 @@ Since the switch only provides an electrical signal, you need a program (usually
 **Basic Setup**:
 One side of the button is connected to GND, and one side is connected to the pin you want to use, which has a pull-up resistor (in the code below, the pin is 4).
 
-`from gpiozero import Button`
+```
+from gpiozero import Button
 
-`button = Button(4)`
-`button.wait_for_press()`
-`print("The button was pressed!")`
+button = Button(4)
+button.wait_for_press()
+print("The button was pressed!")```
+```
 
 # Pull-up/Pull-down resistor:
 Inside the Raspberry Pi, there is a resistor that connects a GPIO pin to either 3.3V (pull-up) or GND (pull-down), preventing a short from happening when the button is pressed. If a short happens (GND is connected directly to power), a bunch of current flows, just like if you connect the two sides of a battery. Typically, internal pull-up resistors are used as described in the basic setup above, but note that if you use a pull-down resistor, which would connect the pin to GND when the button isn’t pressed, the button would have to have one side connected to power and the other connected to the pin you want to use, instead.
 
 Code example:
-`import RPi.GPIO as GPIO`
-`import time`
+```
+import RPi.GPIO as GPIO
+import time
 
-`BUTTON_GPIO = 17` # Choose any available GPIO pin
+BUTTON_GPIO = 17 # Choose any available GPIO pin
 
-`GPIO.setmode(GPIO.BCM) # Use the Broadcom pin numbering scheme`
+GPIO.setmode(GPIO.BCM) # Use the Broadcom pin numbering scheme
   - Set the pin as an input and enable the internal PULL-UP resistor
-`GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)`
+GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-`while True:`
+while True:
     # Read the state of the button
     # Because we used a pull-up, the value is LOW (0) when pressed
-    `if GPIO.input(BUTTON_GPIO) == GPIO.LOW:`
-        `print("Button was pressed!")`
-    ``
-    `time.sleep(0.1)` # Wait a bit to prevent reading the button too many times
+    if GPIO.input(BUTTON_GPIO) == GPIO.LOW:
+        print("Button was pressed!")
+    
+    time.sleep(0.1) # Wait a bit to prevent reading the button too many times
+```
 
 Using the internal pull-up resistor is usually the simplest way to wire this switch to a Raspberry Pi, as it only requires connecting the switch between a GPIO input pin and a Ground (GND) pin.
 ![alt text](resistor.png)
@@ -211,8 +215,8 @@ Since servos operate with PWM, the servo control wire (yellow) must be connected
     `sleep(1)`
 
 # Touch-Sense Hat:
-[Adafruit Capacitive Touch HAT for Raspberry Pi - Mini Kit [MPR121] : ID 2340](https://www.adafruit.com/product/2340)
-[Python & CircuitPython | Adafruit MPR121 12-Key Capacitive Touch Sensor Breakout Tutorial](https://learn.adafruit.com/adafruit-mpr121-12-key-capacitive-touch-sensor-breakout-tutorial/python-circuitpython)
+[Adafruit Capacitive Touch HAT for Raspberry Pi](https://www.adafruit.com/product/2340)
+[Python & CircuitPython | Capacitive Touch Sensor Breakout Tutorial](https://learn.adafruit.com/adafruit-mpr121-12-key-capacitive-touch-sensor-breakout-tutorial/python-circuitpython)
 
 Example Code:
 `import time`
@@ -242,12 +246,11 @@ Examples can be found in the folder: “/usr/src/sense-hat/examples/python-sense
 ## GPIO - Buttons, LEDs, Servo, Buzzers:
 [Installing GPIO Zero — gpiozero 2.0.1 Documentation](https://gpiozero.readthedocs.io/en/stable/installing.html#raspberry-pi)
 
-Notes:
-Should already be installed
-Need to give permissions. Run this in the Pi’s terminal: sudo usermod -a -G gpio <your_username> 
-Servo: Since the Raspberry Pi is a fully fledged computer and multiple pieces of code run at the same time, timing is not as precise. GPIO Zero library supports servos, but they are jittery because the PWM signal is not consistent enough. This is why a separate library is needed to have non-jittery servos, it does some complex code stuff involving interrupts. You can use GPIO Zero if you just move a servo to a position and then turn off the PWM signal.
-Nonjittery Servo Article:  (we didn’t get it working, pigpio has to be initialized using sudo pigpiod and maybe some other steps) https://medium.com/@makerhacks/jitter-free-servo-control-on-the-raspberry-pi-f596bf07d09f 
-Continuous Servo: Uses the same servo libraries as above. I think you can control speed but not position, this needs to be tested. “Position "90" (1.5ms pulse) is stop, "180" (2ms pulse) is full speed forward, "0" (1ms pulse) is full speed backward. They may require some simple calibration, simply tell the servo to 'stop' and then gently adjust the potentiometer in the recessed hole with a small screwdriver until the servo stops moving.” https://www.adafruit.com/product/154?srsltid=AfmBOoptop99bL5_lxYjCYqGNZttixjbZLOcAF2bz4I5EZUxTgE32DbG
+*Notes:*
+- Should already be installed
+- Need to give permissions. Run this in the Pi’s terminal: `sudo usermod -a -G gpio <your_username>` 
+- Servo: Since the Raspberry Pi is a fully fledged computer and multiple pieces of code run at the same time, timing is not as precise. GPIO Zero library supports servos, but they are jittery because the PWM signal is not consistent enough. This is why a separate library is needed to have non-jittery servos, it does some complex code stuff involving interrupts. You can use GPIO Zero if you just move a servo to a position and then turn off the PWM signal.
+- Continuous Servo: Uses the same servo libraries as above. I think you can control speed but not position, this needs to be tested. “Position "90" (1.5ms pulse) is stop, "180" (2ms pulse) is full speed forward, "0" (1ms pulse) is full speed backward. They may require some simple calibration, simply tell the servo to 'stop' and then gently adjust the potentiometer in the recessed hole with a small screwdriver until the servo stops moving.” https://www.adafruit.com/product/154?srsltid=AfmBOoptop99bL5_lxYjCYqGNZttixjbZLOcAF2bz4I5EZUxTgE32DbG
 
 # Code we Ran and Tested:
 GPIO Zero Button Test (Switches use the same code):
@@ -325,11 +328,11 @@ GPIO Zero Button Test (Switches use the same code):
 ## Neopixels:
 [Pi5Neo Documentation](https://github.com/vanshksingh/Pi5Neo?tab=readme-ov-file)
 
-Setup:
+**Setup:**
 `sudo raspi-config`
 Navigate to Interface Options > SPI and enable it. *(the SPI is used with the NeoPixels)*
 
-## Creating a Virtual Environment
+## Using Pi5Neo in a Virtual Environment
 This is a very important step when making projects and using libraries.
 
 `python3 -m venv myenv`  Creates a virtual environment named 'myenv'
@@ -573,17 +576,7 @@ They regulate the flow of current in mixed-signal circuits that interconnect sen
 
 - In IoT prototyping and hackathons, mastery of transistor-based circuit design enables students to convert conceptual “smart ideas” into functional, interactive, and autonomous prototypes.
 
-
-
-
-### TO DO
-
-
-
-
-
-
-### How to Automatically Run Scripts When Your Computer Starts
+# How to Automatically Run Scripts When Your Computer Starts
 This guide explains in simple terms how to make your computer automatically run a script or program every time it starts or when you log in. You don’t need to be a programmer, just follow the steps below.
 
 Imagine you built a small weather station or camera project on your Raspberry Pi. Every time you restart it, you have to open the terminal and run a command to start your program. That gets tiring quickly. By using the methods below, you can make your Raspberry Pi automatically start your script every time it powers on, no typing needed. 
@@ -593,7 +586,7 @@ Once you set this up, you can just plug in your Pi and your project will launch 
 
 **For Linux Users (including Raspberry Pi)**
 Linux systems can run scripts automatically at startup or login. You can choose between a quick cron method or a more reliable systemd service.
-**Option 1:** Using @reboot in crontab 
+**Option 1:** Using `@reboot` in crontab 
 1.	Open the Terminal.
 2.	Type:
 3.	crontab -e
@@ -612,51 +605,36 @@ This opens your personal startup list.
 2.	Create a new service file:
 - `sudo nano /etc/systemd/system/myscript.service`
 3.	Paste this inside: [Unit]
-6.	Description=Run my script at boot
-7.	After=network-online.target
-8.	Wants=network-online.target
-9.	[Service]
-10.	ExecStart=/home/pi/myscript.sh
-11.	WorkingDirectory=/home/pi
-12.	StandardOutput=inherit
-13.	StandardError=inherit
-14.	Restart=always
-15.	User=pi
-16.	[Install]
-17.	WantedBy=multi-user.target
+4. Description=Run my script at boot
+5. After=network-online.target
+6. Wants=network-online.target
+7. [Service]
+8. ExecStart=/home/pi/myscript.sh
+9. WorkingDirectory=/home/pi
+10. StandardOutput=inherit
+11. StandardError=inherit
+12. Restart=always
+13. User=pi
+14. [Install]
+15. WantedBy=multi-user.target
 Change paths or username if needed.
-18.	Save and exit (Ctrl + X, then Y, then Enter).
-19.	Enable and start the service:
-20.	sudo systemctl daemon-reload
-21.	sudo systemctl enable myscript.service
-22.	sudo systemctl start myscript.service
-23.	Check its status:
-24.	systemctl status myscript.service
-25.	Reboot to confirm it launches automatically.
+16. Save and exit (Ctrl + X, then Y, then Enter).
+17. Enable and start the service:
+18. sudo systemctl daemon-reload
+19. sudo systemctl enable myscript.service
+20. sudo systemctl start myscript.service
+21. Check its status:
+22. systemctl status myscript.service
+23. Reboot to confirm it launches automatically.
 
 Extra Tips
-•	Always use the full path to your script and test it manually first.
-•	Add a line at the top of your script to define the shell, for example:
-•	#!/bin/bash
-•	If your script depends on Wi-Fi or other services, start it with a delay:
-•	sleep 10
-•	To view logs, use:
-•	journalctl -u myscript.service -e
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- Always use the full path to your script and test it manually first.
+- Add a line at the top of your script to define the shell, for example:
+  - `#!/bin/bash`
+  - If your script depends on Wi-Fi or other services, start it with a delay:
+      - `sleep 10`
+    - To view logs, use:
+      - `journalctl -u myscript.service -e`
 
 
 ### I²C Communication in IoT Systems
