@@ -114,7 +114,7 @@ They can be configured as inputs (to read signals from sensors, like detecting i
 ![alt text](rasp-pi-pinout.png)
 Many of these GPIO pins also have specialized functions (like I2C, SPI, UART, or PWM, noted in parentheses) which are used for more complex communication with specific types of devices.
 
-# Breadboard Diagram:
+## Breadboard Diagram:
 All points with lines between them are connected, and will be of the same voltage. Typically the side “rails” are used to supply power and ground to components on the breadboard, where the red line is power and the blue line is ground. If using both sets of rails for the same voltages, they should be connected to the same line on the other side of the board.
 
 ![alt text](breadboard-diagram.png)
@@ -136,7 +136,7 @@ button.wait_for_press()
 print("The button was pressed!")```
 ```
 
-# Pull-up/Pull-down resistor:
+### Pull-up/Pull-down resistor:
 Inside the Raspberry Pi, there is a resistor that connects a GPIO pin to either 3.3V (pull-up) or GND (pull-down), preventing a short from happening when the button is pressed. If a short happens (GND is connected directly to power), a bunch of current flows, just like if you connect the two sides of a battery. Typically, internal pull-up resistors are used as described in the basic setup above, but note that if you use a pull-down resistor, which would connect the pin to GND when the button isn’t pressed, the button would have to have one side connected to power and the other connected to the pin you want to use, instead.
 
 Code example:
@@ -162,14 +162,14 @@ while True:
 Using the internal pull-up resistor is usually the simplest way to wire this switch to a Raspberry Pi, as it only requires connecting the switch between a GPIO input pin and a Ground (GND) pin.
 ![alt text](resistor.png)
 
-# LEDs:
+## LEDs:
 One side is connected to GND, the other side is connected to a pin. The resistor can be on either side of the LED, as long as the anode of the LED is connected to the pin you’re powering the LED from, whether that be directly or through the resistor. The larger the resistor, the dimmer the LED will be, but it is important to make sure that you have a resistor large enough to safely power the LED. For example, using the calculator below, which lists the typical voltage drop across each LED color, we can calculate the minimum resistance needed to connect a red LED, as shown below. To be safe, we’ll assume that the red LED uses 2.1V across itself (forward voltage). Since we know the GPIO pin supplies 3.3V (supply voltage) when on, assuming a standard forward current of 20 mA, at least a 60-ohm resistor would be needed to safely operate the LED. It is always safe to increase this value.
 [LED Series Resistor Calculator | DigiKey Electronics](https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-led-series-resistor)
 [4 Band Resistor Color Code Calculator](https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-resistor-color-code)
 
 ![alt text](led-diagram.png)
 
-# PWM Diagram:
+## PWM Diagram:
 ![alt text](led-diagram.png)
 T is the time it takes for one cycle to complete, or rather, the period. The brightness of an LED can be controlled with PWM: with a 25% duty cycle, the LED would appear dimmer than with a 75% duty cycle, since the percentages correspond to the fraction of the period the LED is actually on. It should be noted that the type of PWM available differs by pin on the Raspberry Pi. All GPIOs can perform software PWM, but only specific pins support hardware PWM, which has better performance. For the Pi 5, the hardware PWM pins are GPIO 12, 13, 18, and 19. The code below brings the LED from “off” to full brightness, and then full brightness to “off”, and repeats.
 
@@ -188,7 +188,7 @@ T is the time it takes for one cycle to complete, or rather, the period. The bri
         `led.value = brightness / 100.0`
         `sleep(0.02)`
 
-# Servo Diagram:
+## Servo Diagram:
 ![alt text](led-diagram.png)
 Since servos operate with PWM, the servo control wire (yellow) must be connected to a GPIO pin using PWM on your Raspberry Pi.
 
@@ -252,7 +252,7 @@ Examples can be found in the folder: “/usr/src/sense-hat/examples/python-sense
 - Servo: Since the Raspberry Pi is a fully fledged computer and multiple pieces of code run at the same time, timing is not as precise. GPIO Zero library supports servos, but they are jittery because the PWM signal is not consistent enough. This is why a separate library is needed to have non-jittery servos, it does some complex code stuff involving interrupts. You can use GPIO Zero if you just move a servo to a position and then turn off the PWM signal.
 - Continuous Servo: Uses the same servo libraries as above. I think you can control speed but not position, this needs to be tested. “Position "90" (1.5ms pulse) is stop, "180" (2ms pulse) is full speed forward, "0" (1ms pulse) is full speed backward. They may require some simple calibration, simply tell the servo to 'stop' and then gently adjust the potentiometer in the recessed hole with a small screwdriver until the servo stops moving.” https://www.adafruit.com/product/154?srsltid=AfmBOoptop99bL5_lxYjCYqGNZttixjbZLOcAF2bz4I5EZUxTgE32DbG
 
-# Code we Ran and Tested:
+### Tested Code for GPIO:
 GPIO Zero Button Test (Switches use the same code):
 `from gpiozero import Button`
 ``
@@ -263,70 +263,15 @@ GPIO Zero Button Test (Switches use the same code):
 *Wiring note: you can either connect to the middle and left pin or the middle and right pin. The switch toggles between connecting either side.*
 ![alt text](wiring-note.png)
 
-# Digital LED Test:
-`from gpiozero import LED`
-`from time import sleep`
-
-`red = LED(2)`
-
-`while True:`
-    `red.on()`
-    `sleep(1)`
-    `red.off()`
-    `sleep(1)`
-
-# Dimmable LED:
-`from gpiozero import PWMLED`
-`from time import sleep`
-
-`led = PWMLED(2)`
-
-`while True:`
-    `led.value = 0  # off`
-    `sleep(1)`
-    `led.value = 0.5  # half brightness`
-    `sleep(1)`
-    `led.value = 1  # full brightness`
-    `sleep(1)`
-
-# Jittery Servo:
-`from gpiozero import AngularServo`
-`from time import sleep`
-`pin = 17`
-`servo = AngularServo(pin, min_angle=-90, max_angle=90)`
-
-`while True:`
-    `servo.angle = -90`
-    `sleep(2)`
-    `servo.angle = -45`
-    `sleep(2)`
-    `servo.angle = 0`
-    `sleep(2)`
-    `servo.angle = 45`
-    `sleep(2)`
-    `servo.angle = 90`
-    `sleep(2)`
-
-
 # Motion Sensor:
+The component shown is a PIR (Passive Infrared) Motion Sensor. It detects movement by sensing changes in heat (infrared radiation) in its surrounding area. When it senses motion, its OUTPUT signal changes, telling the Raspberry Pi that something has moved.
 ![alt text](motion-sensor.png)
-`from gpiozero import Button`
-`import time`
 
-`if __name__ == '__main__':`
-  `MotionSensor = Button(26)`
-  
-  
-  `while True:`
-    `time.sleep(1)`
-    ``
-    `if MotionSensor.is_pressed:`
-        `print("Motion is detected")`
-    `else:`
-        `print("Motion is not detected")`
 
 ## Neopixels:
 [Pi5Neo Documentation](https://github.com/vanshksingh/Pi5Neo?tab=readme-ov-file)
+When using the neopixel technology and libraries, you will need to include this in a venv so the packages within the library do not affect any other project. 
+[Click here to go to the Venv documentation.](#create-virtual-environment)
 
 **Setup:**
 `sudo raspi-config`
