@@ -703,19 +703,17 @@ Once wiring is complete, power the Raspberry Pi back on.
 
 Before the RFID reader can communicate with the Pi, you must enable SPI in the system settings:
 
-Open Terminal
+- Open Terminal
 
-Run:
-
+- Run: 
 ```sudo raspi-config```
 
-Go to Interface Options -> Select SPI -> Choose Yes to enable it (to navigate to yes use right arrow key)
+- Go to Interface Options -> Select SPI -> Choose Yes to enable it (to navigate to yes use right arrow key)
 
-Exit the menu and reboot the Pi
-
+- Exit the menu and reboot the Pi: 
 ```sudo reboot```
 
-***SPI must be enabled for the RC522 to work properly.***
+**SPI must be enabled for the RC522 to work properly.**
 ---
 
 # 📥 Step 2 — Installing the RFID Library (Required)
