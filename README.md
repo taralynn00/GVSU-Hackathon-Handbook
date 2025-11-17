@@ -3,6 +3,7 @@
 # Table of Contents
 [⚠️ Safety](#create-virtual-environment)
 - [Power Supply](#power-supply)
+
 [Power Supply](#power-supply)
 [Commands To Know](#commands-to-know)
 [General Terms](#general-terms)
@@ -14,28 +15,35 @@
 - [LEDs](#leds)
 - [PWM Diagram](#pwm-diagram)
 - [Motion Sensors](#motion-sensors)
+
 [Hats in IoT Systems](#hats-in-iot-systems)
 - [Touch-Sense (MPR121) HAT](#touch-sense-mpr121-hat)
 - [Sense Hat](#sensehat)
 - [Servo Diagram](#servo-diagram)
 - [GPIO - Buttons, LEDs, Servo, Buzzers](#gpio---buttons-leds-servo-buzzers)
+
 [Neopixels](#neopixels)
 - [Using Pi5Neo in a Virtual Environment](#using-pi5neo-in-a-virtual-environment)
+
 [I2C OLED](#i2c-oled)
 - [Scrolling Test Example for I2C OLED](#scrolling-test-example-for-i2c-oled)
 - [Putting Images on Device for I2C OLED](#putting-images-on-device-for-i2c-oled)
+
 [Audio and Microphone Setup](#audio-and-microphone-setup)
 [Enable SPI on Raspberry Pi](#enable-spi-on-raspberry-pi)
 [IoT Foundational Concepts](#iot-foundational-concepts)
 - [Time Blurb About Time Library](#time-blurb-about-time-library)
 - [Resistors](#resistors)
 - [Transistors](#transistors)
+
 [How to Automatically Run Scripts When Your Computer Starts](#how-to-automatically-run-scripts-when-your-computer-starts)
+
 [RFID – Using the RC522 Reader on Raspberry Pi 5](#-rfid--using-the-rc522-reader-on-raspberry-pi-5)
 - [Hardware Setup](#hardware-setup-do-this-before-installing-software)
 - [RC522 → Raspberry Pi 5 Wiring](#-rc522--raspberry-pi-5-wiring)
 - [Installing the RFID Library (Required)](#-installing-the-rfid-library-required)
 - [Testing the Reader](#testing-the-reader)
+
 [I²C Communication in IoT Systems](#ic-communication-in-iot-systems)
 
 
