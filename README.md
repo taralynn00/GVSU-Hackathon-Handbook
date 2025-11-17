@@ -1,7 +1,7 @@
 # 💻 GVSU x GRPS Hackathon Technical Information
 
-# Table of Contents
-[⚠️ Safety](#create-virtual-environment)
+## Table of Contents
+[Safety](#create-virtual-environment)
 - [Power Supply](#power-supply)
 
 [Power Supply](#power-supply)
