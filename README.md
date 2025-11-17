@@ -10,7 +10,7 @@
 [Creating a Virtual Environment](#create-virtual-environment)  
 [Raspberry Pi Pinout](#raspberry-pi-pinout)  
 [Misc. Diagrams](#misc-diagrams)  
-- [Breadboard Diagram](#breadboard-diagram
+- [Breadboard Diagram](#breadboard-diagram)
 - [Button Diagram](#button-diagram)
 - [LEDs](#leds)
 - [PWM Diagram](#pwm-diagram)
