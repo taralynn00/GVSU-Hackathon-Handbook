@@ -1,4 +1,4 @@
-# 💻 GVSU x GRPS Hackathon Technical Information
+# 💻 GVSU x GRPS Hackathon Handbook
 
 ## Table of Contents
 1. [Safety](#️-safety)
@@ -53,7 +53,7 @@ Always follow proper shutdown procedures to protect the operating system and har
 *Wait for the Lights:* After a shutdown command, wait for the Pi's green activity light to stop blinking (it may turn off completely) before disconnecting the power supply.
 
 **Component and Handling Safety**
-- *Mind the Voltage and Polarity:* The provided documentation states the power supply is to be set to 4.75-5.25V. Turning the knob too fast and above ~5.25V can instantly destroy the Raspberry Pi and/or the Hat.
+- *Mind the Voltage and Polarity:* The provided documentation states the power supply is to be set to 4.75-5.25V. We found best voltage setting to be 5.35-37V. Turning the knob too fast and above ~5.4V can instantly destroy the Raspberry Pi and/or the Hat. 
   
 - *Keep Wires Tidy:* Ensure no loose wire ends, metal tools, or components can accidentally touch different pins or traces on the Pi or Hat. A short circuit can cause excessive current draw, generate heat, and permanently damage the board or cause the battery to become a fire hazard.
   
@@ -65,8 +65,8 @@ Always follow proper shutdown procedures to protect the operating system and har
   
 
 ### Power Supply
-Power Supply Setting: 5.25V
-*Note: Turn the knob slowly until it clicks. Once it clicks, the voltage should start around 3V. Slowly continue turning the knob until it hits 5.25 volts.*
+Power Supply Setting: 5.35-37V
+*Note: Turn the knob slowly until it clicks. Once it clicks, the voltage should start around 3V. Slowly continue turning the knob until it hits ~5.35 volts.*
 
 ## Commands to Know:
 ### Setup Commands:
