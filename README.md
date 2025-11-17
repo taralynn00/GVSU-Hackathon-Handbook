@@ -1,5 +1,44 @@
 # 💻 GVSU x GRPS Hackathon Technical Information
 
+# Table of Contents
+[⚠️ Safety](#create-virtual-environment)
+- [Power Supply](#power-supply)
+[Power Supply](#power-supply)
+[Commands To Know](#commands-to-know)
+[General Terms](#general-terms)
+[Creating a Virtual Environment](#create-virtual-environment)
+[Raspberry Pi Pinout](#raspberry-pi-pinout)
+[Misc. Diagrams](#misc-diagrams)
+- [Breadboard Diagram](#breadboard-diagram)
+- [Button Diagram](#button-diagram)
+- [LEDs](#leds)
+- [PWM Diagram](#pwm-diagram)
+- [Motion Sensors](#motion-sensors)
+[Hats in IoT Systems](#hats-in-iot-systems)
+- [Touch-Sense (MPR121) HAT](#touch-sense-mpr121-hat)
+- [Sense Hat](#sensehat)
+- [Servo Diagram](#servo-diagram)
+- [GPIO - Buttons, LEDs, Servo, Buzzers](#gpio---buttons-leds-servo-buzzers)
+[Neopixels](#neopixels)
+- [Using Pi5Neo in a Virtual Environment](#using-pi5neo-in-a-virtual-environment)
+[I2C OLED](#i2c-oled)
+- [Scrolling Test Example for I2C OLED](#scrolling-test-example-for-i2c-oled)
+- [Putting Images on Device for I2C OLED](#putting-images-on-device-for-i2c-oled)
+[Audio and Microphone Setup](#audio-and-microphone-setup)
+[Enable SPI on Raspberry Pi](#enable-spi-on-raspberry-pi)
+[IoT Foundational Concepts](#iot-foundational-concepts)
+- [Time Blurb About Time Library](#time-blurb-about-time-library)
+- [Resistors](#resistors)
+- [Transistors](#transistors)
+[How to Automatically Run Scripts When Your Computer Starts](#how-to-automatically-run-scripts-when-your-computer-starts)
+[RFID – Using the RC522 Reader on Raspberry Pi 5](#-rfid--using-the-rc522-reader-on-raspberry-pi-5)
+- [Hardware Setup](#hardware-setup-do-this-before-installing-software)
+- [RC522 → Raspberry Pi 5 Wiring](#-rc522--raspberry-pi-5-wiring)
+- [Installing the RFID Library (Required)](#-installing-the-rfid-library-required)
+- [Testing the Reader](#testing-the-reader)
+[I²C Communication in IoT Systems](#ic-communication-in-iot-systems)
+
+
 ### Documentation
 Reading documentation can be very helpful! Consider it a manual of how to use whatever object or software you are using.
 [Click here to see some documentation about Raspberry Pi!](https://www.raspberrypi.com/documentation/)
@@ -103,6 +142,20 @@ To deactivate and leave the venv, you must already be inside of the venv. Naviga
 ## Where to create python files in a venv:
 You typically put them inside of the venv folder itself. In this example: "/home/techshow1/Documents/TestCode/testVenv”
 
+# Enable SPI on Raspberry Pi
+1. Open Terminal
+2. Run the configuration tool:
+   `sudo raspi-config`
+3. Navigate to Interface Options
+    ![alt text](img/interface-options.png)
+4. Select SPI
+    ![alt text](img/select-spi.png)
+    When asked “Would you like the SPI interface to be enabled?”, select Yes
+    ![alt text](img/enable-spi.png)
+5. Finish and reboot
+    Select Finish
+    When prompted, choose Yes to reboot the Pi.
+*(If not prompted, `run sudo reboot`.)*
 
 # Raspberry Pi Pinout:
 **GPIO Pins:** The majority of the pins are labeled GPIO followed by a number (e.g., GPIO 2, GPIO 17). These are the main programmable pins.
@@ -283,7 +336,7 @@ while True:
 - Servo: Since the Raspberry Pi is a fully fledged computer and multiple pieces of code run at the same time, timing is not as precise. GPIO Zero library supports servos, but they are jittery because the PWM signal is not consistent enough. This is why a separate library is needed to have non-jittery servos, it does some complex code stuff involving interrupts. You can use GPIO Zero if you just move a servo to a position and then turn off the PWM signal.
 - Continuous Servo: Uses the same servo libraries as above. I think you can control speed but not position, this needs to be tested. “Position "90" (1.5ms pulse) is stop, "180" (2ms pulse) is full speed forward, "0" (1ms pulse) is full speed backward. They may require some simple calibration, simply tell the servo to 'stop' and then gently adjust the potentiometer in the recessed hole with a small screwdriver until the servo stops moving.” https://www.adafruit.com/product/154?srsltid=AfmBOoptop99bL5_lxYjCYqGNZttixjbZLOcAF2bz4I5EZUxTgE32DbG
 
-### Tested Code for GPIO:
+### GPIO Switch Example Code:
 GPIO Zero Button Test (Switches use the same code):
 ```
 from gpiozero import Button
@@ -306,34 +359,18 @@ When using the neopixel technology and libraries, you will need to include this 
 Navigate to Interface Options > SPI and enable it. *(the SPI is used with the NeoPixels)*
 
 ## Using Pi5Neo in a Virtual Environment
-This is a very important step when making projects and using libraries.
+Using the Pi5Neo library for NeoPixels within a Python virtual environment (venv) on your Raspberry Pi 5 is the recommended and best practice approach, especially with the recent changes in Raspberry Pi OS (Bookworm and later) which discourages system-wide package installation.
 
 `python3 -m venv myenv`  Creates a virtual environment named 'myenv'
 `source myenv/bin/activate`  Activates the virtual environment
 `pip install pi5neo`  (or pip3) Installs pi5neo within the virtual environment
 
-```
-from pi5neo import Pi5Neo
-import time
+Click here to read the documentation about creating virtual environments if you need more info!
+[Create Virtual Environment](#create-virtual-environment)
 
-def rainbow_cycle(neo, delay=0.1):
-    colors = [
-        (255, 0, 0),  # Red
-        (255, 127, 0),  # Orange
-        (255, 255, 0),  # Yellow
-        (0, 255, 0),  # Green
-        (0, 0, 255),  # Blue
-        (75, 0, 130),  # Indigo
-        (148, 0, 211)  # Violet
-    ]
-    for color in colors:
-        neo.fill_strip(*color)
-        neo.update_strip()
-        time.sleep(delay)
-
-neo = Pi5Neo('/dev/spidev0.0', 10, 800)
-rainbow_cycle(neo)
-```
+**REMEMBER**
+You must enable the SPI interface on your Raspberry Pi 5 before running any code.
+[Click here to view more info about enabling the SPI interface.](#enable-spi-on-raspberry-pi)
 
 # I2C OLED:
 1. Enable I2C Interface:
@@ -526,21 +563,6 @@ if __name__ == "__main__":
     test_microphone()
     print("✅ Test complete.")
 ```
-
-# Enable SPI on Raspberry Pi
-1. Open Terminal
-2. Run the configuration tool:
-   `sudo raspi-config`
-3. Navigate to Interface Options
-    ![alt text](img/interface-options.png)
-4. Select SPI
-    ![alt text](img/select-spi.png)
-    When asked “Would you like the SPI interface to be enabled?”, select Yes
-    ![alt text](img/enable-spi.png)
-5. Finish and reboot
-    Select Finish
-    When prompted, choose Yes to reboot the Pi.
-*(If not prompted, `run sudo reboot`.)*
 
 # IoT Foundational Concepts
 A quick guide to Time Libraries, Resistors, and Transistors in project design.
@@ -794,8 +816,7 @@ If problems continue, ensure the correct MFRC522 library (Pi‑5 compatible) is 
 
 Your RFID module is now fully set up and ready to integrate into your hackathon project. With wiring complete, the correct software installed, and the ability to read card UIDs, you can begin building interactive systems that respond to RFID tags in creative and exciting ways.
 
-### I²C Communication in IoT Systems
-# Overview
+# I²C Communication in IoT Systems
  **I²C (Inter-Integrated Circuit)** is a serial communication protocol that enables multiple digital devices — such as microcontrollers, sensors, and displays — to communicate using only **two shared signal lines**.
 
 
