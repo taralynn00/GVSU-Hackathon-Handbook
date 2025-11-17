@@ -4,17 +4,17 @@
 [Safety](#create-virtual-environment)
 - [Power Supply](#power-supply)
 
-[Power Supply](#power-supply)
-[Commands To Know](#commands-to-know)
-[General Terms](#general-terms)
-[Creating a Virtual Environment](#create-virtual-environment)
-[Raspberry Pi Pinout](#raspberry-pi-pinout)
-[Misc. Diagrams](#misc-diagrams)
-- [Breadboard Diagram](#breadboard-diagram)
+[Power Supply](#power-supply)  
+[Commands To Know](#commands-to-know)  
+[General Terms](#general-terms)  
+[Creating a Virtual Environment](#create-virtual-environment)  
+[Raspberry Pi Pinout](#raspberry-pi-pinout)  
+[Misc. Diagrams](#misc-diagrams)  
+- [Breadboard Diagram](#breadboard-diagram
 - [Button Diagram](#button-diagram)
 - [LEDs](#leds)
 - [PWM Diagram](#pwm-diagram)
-- [Motion Sensors](#motion-sensors)
+- [Motion Sensors](#motion-sensors)  
 
 [Hats in IoT Systems](#hats-in-iot-systems)
 - [Touch-Sense (MPR121) HAT](#touch-sense-mpr121-hat)
@@ -30,11 +30,11 @@
 - [Putting Images on Device for I2C OLED](#putting-images-on-device-for-i2c-oled)
 
 [Audio and Microphone Setup](#audio-and-microphone-setup)
-[Enable SPI on Raspberry Pi](#enable-spi-on-raspberry-pi)
-[IoT Foundational Concepts](#iot-foundational-concepts)
+- [Enable SPI on Raspberry Pi](#enable-spi-on-raspberry-pi)  
+[IoT Foundational Concepts](#iot-foundational-concepts)  
 - [Time Blurb About Time Library](#time-blurb-about-time-library)
 - [Resistors](#resistors)
-- [Transistors](#transistors)
+- [Transistors](#transistors) 
 
 [How to Automatically Run Scripts When Your Computer Starts](#how-to-automatically-run-scripts-when-your-computer-starts)
 
@@ -150,21 +150,6 @@ To deactivate and leave the venv, you must already be inside of the venv. Naviga
 ## Where to create python files in a venv:
 You typically put them inside of the venv folder itself. In this example: "/home/techshow1/Documents/TestCode/testVenv”
 
-# Enable SPI on Raspberry Pi
-1. Open Terminal
-2. Run the configuration tool:
-   `sudo raspi-config`
-3. Navigate to Interface Options
-    ![alt text](img/interface-options.png)
-4. Select SPI
-    ![alt text](img/select-spi.png)
-    When asked “Would you like the SPI interface to be enabled?”, select Yes
-    ![alt text](img/enable-spi.png)
-5. Finish and reboot
-    Select Finish
-    When prompted, choose Yes to reboot the Pi.
-*(If not prompted, `run sudo reboot`.)*
-
 # Raspberry Pi Pinout:
 **GPIO Pins:** The majority of the pins are labeled GPIO followed by a number (e.g., GPIO 2, GPIO 17). These are the main programmable pins.
 
@@ -183,6 +168,9 @@ These could be helpful when implementing different tools in your project!
 ## Breadboard Diagram:
 All points with lines between them are connected, and will be of the same voltage. Typically the side “rails” are used to supply power and ground to components on the breadboard, where the red line is power and the blue line is ground. If using both sets of rails for the same voltages, they should be connected to the same line on the other side of the board.
 
+Here is a video to learn about how to use a breadboard!
+[💡 How to Use a Breadboard: A Beginner's Guide to Prototyping 🔧](https://youtu.be/oPMgerbKBwM?si=SqExYYlA8SQw6aky)
+
 ![alt text](img/breadboard-diagram.png)
 
 ## Button Diagram:
@@ -192,7 +180,7 @@ Since the switch only provides an electrical signal, you need a program (usually
 ![alt text](img/button-diagram.png)
 
 **Basic Setup**:
-One side of the button is connected to GND, and one side is connected to the pin you want to use, which has a pull-up resistor (in the code below, the pin is 4).
+One side of the button is connected to GND, and one side is connected to the pin you want to use, which has a pull-up resistor.
 
 ```
 from gpiozero import Button
@@ -276,8 +264,12 @@ The component shown is a PIR (Passive Infrared) Motion Sensor. It detects moveme
 - Purpose: Adds capacitive touch sensing—detecting proximity or touch through conductive surfaces—for creative or user-input IoT designs.
 
 - Product & Tutorial:
-    [Adafruit MPR121 Capacitive Touch Sensor](https://www.adafruit.com/product/2340)
-    [Python/CircuitPython Setup Guide](https://learn.adafruit.com/adafruit-mpr121-12-key-capacitive-touch-sensor-breakout-tutorial/python-circuitpython)
+  - [Adafruit MPR121 Capacitive Touch Sensor](https://www.adafruit.com/product/2340)
+  - [Python/CircuitPython Setup Guide](https://learn.adafruit.com/adafruit-mpr121-12-key-capacitive-touch-sensor-breakout-tutorial/python-circuitpython)
+
+1. Create Venv and activate
+2. Install https://pypi.org/project/Adafruit-Blinka/ by running `pip install Adafruit-Blinka in venv`
+3. Run `pip3 install adafruit-circuitpython-mpr121` in Venv **DO NOT USE SUDO**
 
 Example Code:
 ```
@@ -440,6 +432,7 @@ with Image.new("1", device.size) as img:
 
 *Note: These are the available fonts as defaults.*
 ![alt text](img/fonts.png)
+
 Here’s a different font type and size (20 is the size of the font in pixels):
 `ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 20)`
 
@@ -512,6 +505,21 @@ The Raspberry Pi 5 has built-in support for USB audio devices through PulseAudio
 Instead of using the device’s interface name, we used “pulse” as the audio interface.
 
 There is also a script named test.py that can be used to verify both the audio output and the microphone input.
+
+## Enable SPI on Raspberry Pi
+1. Open Terminal
+2. Run the configuration tool:
+   `sudo raspi-config`
+3. Navigate to Interface Options  
+    - ![alt text](img/interface-options.png)
+4. Select SPI  
+    - ![alt text](img/select-spi.png)
+    When asked “Would you like the SPI interface to be enabled?”, select Yes   
+    - ![alt text](img/enable-spi.png)
+5. Finish and reboot
+    Select Finish
+    When prompted, choose Yes to reboot the Pi.
+*(If not prompted, `run sudo reboot`.)*
 
 ## Testing the Microphone
 To confirm that the microphone is working, use the following command in Terminal:
@@ -587,16 +595,16 @@ Common options and functions include:
 
 Overall, the time library is essential for any program that needs to handle timing, scheduling, or performance tracking.
 
-## Current-Limiting Protection
-In sensor and indicator circuits, resistors limit current flow through components such as **LEDs, photodiodes, or buzzers**, preventing component burnout.
-
-![alt text](img/current-limiting.png)
-
 ## Resistors
 [Resistors explained simply!](https://www.youtube.com/watch?v=x6jajfprWZo)
 In Internet of Things (IoT) hardware design, resistors are among the most fundamental components ensuring that electronic subsystems operate within safe and predictable limits.
 
 They regulate the flow of current in mixed-signal circuits that interconnect sensors, actuators, and microcontrollers such as the Raspberry Pi or ESP32.
+
+Here is a simple video explaining resistors!
+[Resistors Explained & Ohm's Law Made Simple!](https://youtu.be/x6jajfprWZo?si=Db5h9iqIo8uHemBS)  
+
+![alt text](img/current-limiting.png)
 
 ### Key Takeaways
 - Resistors serve as the control backbone of IoT electronics, ensuring reliable data acquisition, safe operation, and efficient power management.
@@ -639,68 +647,6 @@ They regulate the flow of current in mixed-signal circuits that interconnect sen
 - Selection between BJT, Darlington, and MOSFET devices depends on trade-offs among speed, current capacity, and control voltage.
 
 - In IoT prototyping and hackathons, mastery of transistor-based circuit design enables students to convert conceptual “smart ideas” into functional, interactive, and autonomous prototypes.
-
-# How to Automatically Run Scripts When Your Computer Starts
-This guide explains in simple terms how to make your computer automatically run a script or program every time it starts or when you log in. You don’t need to be a programmer, just follow the steps below.
-
-Imagine you built a small weather station or camera project on your Raspberry Pi. Every time you restart it, you have to open the terminal and run a command to start your program. That gets tiring quickly. By using the methods below, you can make your Raspberry Pi automatically start your script every time it powers on, no typing needed. 
-
-The @reboot method tells your Pi, “Run this every time I start up,” while the systemd method keeps your program running in the background even if something crashes.
-Once you set this up, you can just plug in your Pi and your project will launch on its own. This makes your setup work like a real automated system, ideal for sensors, data loggers, dashboards, or smart displays that need to run all the time.
-
-
-**For Linux Users (including Raspberry Pi)**
-Linux systems can run scripts automatically at startup or login. You can choose between a quick cron method or a more reliable systemd service.
-**Option 1:** Using `@reboot` in crontab 
-1.	Open the Terminal.
-2.	Type:
-3.	crontab -e
-This opens your personal startup list.
-
-4.	Scroll to the bottom and add this line:
-5.	`@reboot /home/pi/myscript.sh`
-  - Replace "/home/pi/myscript.sh" with the full path to your script.
-6.	Save and exit (Ctrl + X, then Y, then Enter).
-7.	Make the script executable:
-8.	chmod +x /home/pi/myscript.sh
-9.	Reboot your Pi. The script will start automatically after every boot.
-
-**Option 2:** Using systemd (More Reliable and Professional Way)
-1.	Open Terminal.
-2.	Create a new service file:
-- `sudo nano /etc/systemd/system/myscript.service`
-3.	Paste this inside: [Unit]
-4. Description=Run my script at boot
-5. After=network-online.target
-6. Wants=network-online.target
-7. [Service]
-8. ExecStart=/home/pi/myscript.sh
-9. WorkingDirectory=/home/pi
-10. StandardOutput=inherit
-11. StandardError=inherit
-12. Restart=always
-13. User=pi
-14. [Install]
-15. WantedBy=multi-user.target
-Change paths or username if needed.
-16. Save and exit (Ctrl + X, then Y, then Enter).
-17. Enable and start the service:
-18. sudo systemctl daemon-reload
-19. sudo systemctl enable myscript.service
-20. sudo systemctl start myscript.service
-21. Check its status:
-22. systemctl status myscript.service
-23. Reboot to confirm it launches automatically.
-
-Extra Tips
-- Always use the full path to your script and test it manually first.
-- Add a line at the top of your script to define the shell, for example:
-  - `#!/bin/bash`
-  - If your script depends on Wi-Fi or other services, start it with a delay:
-      - `sleep 10`
-    - To view logs, use:
-      - `journalctl -u myscript.service -e`
-
 
 # 📡 RFID – Using the RC522 Reader on Raspberry Pi 5
 
@@ -837,3 +783,63 @@ Typical IoT use cases include connecting **temperature sensors, OLED displays, a
 I²C combines the simplicity of **UART communication** (few wires) with the flexibility of **SPI** (multi-device support), making it ideal for sensor networks and embedded device clusters.
 ![alt text](img/ic-communication.png)
 
+# How to Automatically Run Scripts When Your Computer Starts
+This guide explains in simple terms how to make your computer automatically run a script or program every time it starts or when you log in. You don’t need to be a programmer, just follow the steps below.
+
+Imagine you built a small weather station or camera project on your Raspberry Pi. Every time you restart it, you have to open the terminal and run a command to start your program. That gets tiring quickly. By using the methods below, you can make your Raspberry Pi automatically start your script every time it powers on, no typing needed. 
+
+The @reboot method tells your Pi, “Run this every time I start up,” while the systemd method keeps your program running in the background even if something crashes.
+Once you set this up, you can just plug in your Pi and your project will launch on its own. This makes your setup work like a real automated system, ideal for sensors, data loggers, dashboards, or smart displays that need to run all the time.
+
+
+**For Linux Users (including Raspberry Pi)**
+Linux systems can run scripts automatically at startup or login. You can choose between a quick cron method or a more reliable systemd service.
+**Option 1:** Using `@reboot` in crontab 
+1.	Open the Terminal.
+2.	Type:
+3.	crontab -e
+This opens your personal startup list.
+
+4.	Scroll to the bottom and add this line:
+5.	`@reboot /home/pi/myscript.sh`
+  - Replace "/home/pi/myscript.sh" with the full path to your script.
+6.	Save and exit (Ctrl + X, then Y, then Enter).
+7.	Make the script executable:
+8.	chmod +x /home/pi/myscript.sh
+9.	Reboot your Pi. The script will start automatically after every boot.
+
+**Option 2:** Using systemd (More Reliable and Professional Way)
+1.	Open Terminal.
+2.	Create a new service file:
+- `sudo nano /etc/systemd/system/myscript.service`
+3.	Paste this inside: [Unit]
+4. Description=Run my script at boot
+5. After=network-online.target
+6. Wants=network-online.target
+7. [Service]
+8. ExecStart=/home/pi/myscript.sh
+9. WorkingDirectory=/home/pi
+10. StandardOutput=inherit
+11. StandardError=inherit
+12. Restart=always
+13. User=pi
+14. [Install]
+15. WantedBy=multi-user.target
+Change paths or username if needed.
+16. Save and exit (Ctrl + X, then Y, then Enter).
+17. Enable and start the service:
+18. sudo systemctl daemon-reload
+19. sudo systemctl enable myscript.service
+20. sudo systemctl start myscript.service
+21. Check its status:
+22. systemctl status myscript.service
+23. Reboot to confirm it launches automatically.
+
+Extra Tips
+- Always use the full path to your script and test it manually first.
+- Add a line at the top of your script to define the shell, for example:
+  - `#!/bin/bash`
+  - If your script depends on Wi-Fi or other services, start it with a delay:
+      - `sleep 10`
+    - To view logs, use:
+      - `journalctl -u myscript.service -e`
