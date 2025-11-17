@@ -1,43 +1,5 @@
 # 💻 GVSU x GRPS Hackathon Technical Information
 
-# Table of Contents
-[⚠️ Safety](#create-virtual-environment)
-- [Power Supply](#power-supply)
-[Power Supply](#power-supply)
-[Commands To Know](#commands-to-know)
-[General Terms](#general-terms)
-[Creating a Virtual Environment](#create-virtual-environment)
-[Raspberry Pi Pinout](#raspberry-pi-pinout)
-[Misc. Diagrams](#misc-diagrams)
-- [Breadboard Diagram](#breadboard-diagram)
-- [Button Diagram](#button-diagram)
-- [LEDs](#leds)
-- [PWM Diagram](#pwm-diagram)
-- [Motion Sensors](#motion-sensors)
-[Hats in IoT Systems](#hats-in-iot-systems)
-- [Touch-Sense (MPR121) HAT](#touch-sense-mpr121-hat)
-- [Sense Hat](#sensehat)
-- [Servo Diagram](#servo-diagram)
-- [GPIO - Buttons, LEDs, Servo, Buzzers](#gpio---buttons-leds-servo-buzzers)
-[Neopixels](#neopixels)
-- [Using Pi5Neo in a Virtual Environment](#using-pi5neo-in-a-virtual-environment)
-[I2C OLED](#i2c-oled)
-- [Scrolling Test Example for I2C OLED](#scrolling-test-example-for-i2c-oled)
-- [Putting Images on Device for I2C OLED](#putting-images-on-device-for-i2c-oled)
-[Audio and Microphone Setup](#audio-and-microphone-setup)
-[Enable SPI on Raspberry Pi](#enable-spi-on-raspberry-pi)
-[IoT Foundational Concepts](#iot-foundational-concepts)
-- [Time Blurb About Time Library](#time-blurb-about-time-library)
-- [Resistors](#resistors)
-- [Transistors](#transistors)
-[How to Automatically Run Scripts When Your Computer Starts](#how-to-automatically-run-scripts-when-your-computer-starts)
-[RFID – Using the RC522 Reader on Raspberry Pi 5](#-rfid--using-the-rc522-reader-on-raspberry-pi-5)
-- [Hardware Setup](#hardware-setup-do-this-before-installing-software)
-- [RC522 → Raspberry Pi 5 Wiring](#-rc522--raspberry-pi-5-wiring)
-- [Installing the RFID Library (Required)](#-installing-the-rfid-library-required)
-- [Testing the Reader](#testing-the-reader)
-[I²C Communication in IoT Systems](#ic-communication-in-iot-systems)
-
 ### Documentation
 Reading documentation can be very helpful! Consider it a manual of how to use whatever object or software you are using.
 [Click here to see some documentation about Raspberry Pi!](https://www.raspberrypi.com/documentation/)
@@ -512,6 +474,58 @@ To confirm that the microphone is working, use the following command in Terminal
 This records a **3-second audio clip** using the PulseAudio interface and saves it as test.wav in the current directory.
 You can then play it back with:
 `aplay test.wav`
+
+```
+import subprocess
+import time
+
+def test_speakers():
+    print("🔊 Testing speakers...")
+
+    # Play a built-in system sound (440 Hz sine wave for 1 sec)
+    try:
+        subprocess.run([
+            "speaker-test",
+            "--test", "sine",
+            "--frequency", "440",
+            "--nloops", "1"
+        ], check=True)
+        print("✅ Speaker test finished.")
+    except Exception as e:
+        print("❌ Speaker test failed:", e)
+
+
+def test_microphone():
+    print("🎤 Testing microphone (3-second recording)...")
+
+    try:
+        # Record 3 seconds from default mic
+        subprocess.run([
+            "arecord",
+            "-D", "pulse",  # change if your mic uses a different device
+            "-f", "cd",
+            "-d", "3",
+            "mic_test.wav"
+        ], check=True)
+
+        print("✅ Recording saved as mic_test.wav")
+        print("▶ Playing back the recording...")
+
+        # Play recording
+        subprocess.run(["aplay", "mic_test.wav"], check=True)
+
+    except Exception as e:
+        print("❌ Microphone test failed:", e)
+
+
+if __name__ == "__main__":
+    print("=== Raspberry Pi 5 Speaker & Mic Test ===")
+    time.sleep(1)
+    test_speakers()
+    time.sleep(1)
+    test_microphone()
+    print("✅ Test complete.")
+```
 
 # Enable SPI on Raspberry Pi
 1. Open Terminal
