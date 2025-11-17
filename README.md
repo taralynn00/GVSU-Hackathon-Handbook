@@ -511,11 +511,11 @@ There is also a script named test.py that can be used to verify both the audio o
 2. Run the configuration tool:
    `sudo raspi-config`
 3. Navigate to Interface Options  
-    - ![alt text](img/interface-options.png)
+    - ![alt text](img/interface-options.png) 
 4. Select SPI  
-    - ![alt text](img/select-spi.png)
+    - ![alt text](img/select-spi.png)  
     When asked “Would you like the SPI interface to be enabled?”, select Yes   
-    - ![alt text](img/enable-spi.png)
+    - ![alt text](img/enable-spi.png)  
 5. Finish and reboot
     Select Finish
     When prompted, choose Yes to reboot the Pi.
@@ -667,7 +667,7 @@ Each RFID card or fob contains a **unique UID**, which your program can use to i
 
 ---
 
-# Hardware Setup (Do This Before Installing Software)
+## Hardware Setup (Do This Before Installing Software)
 
 Before running any code, you must correctly connect the RC522 module to the Raspberry Pi 5. All wiring **must be completed while the Raspberry Pi is powered off**, as connecting wires to a powered device can damage the board or the RFID module.
 
@@ -679,7 +679,7 @@ Make sure:
 
 ---
 
-# 🔌 RC522 → Raspberry Pi 5 Wiring
+## 🔌 RC522 → Raspberry Pi 5 Wiring
 
 Below is a clear mapping that shows the **RC522 pin number**, the **signal name**, and the matching **Raspberry Pi 5 pin**. This format helps beginners identify exactly where each wire goes.
 
@@ -711,7 +711,7 @@ Once wiring is complete, power the Raspberry Pi back on.
 Before moving onto the next step, make sure you have enabled your SPI!
 [Enable SPI Documentation](#enable-spi-on-raspberry-pi)
 
-# 📥 Installing the RFID Library (Required)
+## Installing the RFID Library (Required)
 
 ### 2. Install Pi 5–compatible library
 
@@ -735,7 +735,7 @@ cd MFRC522-python
 
 ---
 
-# Testing the Reader
+## Testing the Reader
 
 After installing the library and entering the folder, run the provided reader script:
 
@@ -756,7 +756,7 @@ Each card has a different UID. You will use these UIDs inside your project to id
 
 This MFRC522 library is the **only stable and supported option** for Raspberry Pi 5, which is the platform used in this hackathon.
 
-# 🐞 Troubleshooting Guide
+## Troubleshooting Guide
 
 If the RC522 does not work as expected, try the following:
 
