@@ -1,5 +1,38 @@
 # 💻 GVSU x GRPS Hackathon Technical Information
 
+# Table of Contents
+[⚠️ Safety](#create-virtual-environment)
+- [Power Supply](#power-supply)
+[Power Supply](#power-supply)
+[Commands To Know](#commands-to-know)
+[General Terms](#general-terms)
+[Creating a Virtual Environment](#create-virtual-environment)
+[Raspberry Pi Pinout](#raspberry-pi-pinout)
+[Misc. Diagrams](#misc-diagrams)
+- [Breadboard Diagram](#breadboard-diagram)
+- [Button Diagram](#button-diagram)
+- [LEDs](#leds)
+- [PWM Diagram](#pwm-diagram)
+- [Motion Sensors](#motion-sensors)
+[Hats in IoT Systems](#hats-in-iot-systems)
+- [Touch-Sense (MPR121) HAT](#touch-sense-mpr121-hat)
+- [Sense Hat](#sensehat)
+- [Servo Diagram](#servo-diagram)
+- [GPIO - Buttons, LEDs, Servo, Buzzers](#gpio---buttons-leds-servo-buzzers)
+[Neopixels](#neopixels)
+- [Using Pi5Neo in a Virtual Environment](#using-pi5neo-in-a-virtual-environment)
+[I2C OLED](#i2c-oled)
+- [Scrolling Test Example for I2C OLED](#scrolling-test-example-for-i2c-oled)
+- [Putting Images on Device for I2C OLED](#putting-images-on-device-for-i2c-oled)
+[Audio and Microphone Setup](#audio-and-microphone-setup)
+[Enable SPI on Raspberry Pi](#enable-spi-on-raspberry-pi)
+[IoT Foundational Concepts](#iot-foundational-concepts)
+- [Time Blurb About Time Library](#time-blurb-about-time-library)
+- [Resistors](#resistors)
+- [Transistors](#transistors)
+[How to Automatically Run Scripts When Your Computer Starts](#how-to-automatically-run-scripts-when-your-computer-starts)
+[I²C Communication in IoT Systems](#ic-communication-in-iot-systems)
+
 ### Documentation
 Reading documentation can be very helpful! Consider it a manual of how to use whatever object or software you are using.
 [Click here to see some documentation about Raspberry Pi!](https://www.raspberrypi.com/documentation/)
@@ -116,6 +149,9 @@ They can be configured as inputs (to read signals from sensors, like detecting i
 ![alt text](img/rasp-pi-pinout.png)
 Many of these GPIO pins also have specialized functions (like I2C, SPI, UART, or PWM, noted in parentheses) which are used for more complex communication with specific types of devices.
 
+# Misc. Diagrams
+These could be helpful when implementing different tools in your project!
+
 ## Breadboard Diagram:
 All points with lines between them are connected, and will be of the same voltage. Typically the side “rails” are used to supply power and ground to components on the breadboard, where the red line is power and the blue line is ground. If using both sets of rails for the same voltages, they should be connected to the same line on the other side of the board.
 
@@ -191,6 +227,10 @@ while True:
         led.value = brightness / 100.0
         sleep(0.02)
 ```
+
+## Motion Sensors:
+The component shown is a PIR (Passive Infrared) Motion Sensor. It detects movement by sensing changes in heat (infrared radiation) in its surrounding area. When it senses motion, its OUTPUT signal changes, telling the Raspberry Pi that something has moved.
+![alt text](img/motion-sensor.png)
 
 
 # HATs in IoT Systems
@@ -288,11 +328,6 @@ print("The button was pressed!")
 
 *Wiring note: you can either connect to the middle and left pin or the middle and right pin. The switch toggles between connecting either side.*
 ![alt text](img/wiring-note.png)
-
-## Motion Sensors:
-The component shown is a PIR (Passive Infrared) Motion Sensor. It detects movement by sensing changes in heat (infrared radiation) in its surrounding area. When it senses motion, its OUTPUT signal changes, telling the Raspberry Pi that something has moved.
-![alt text](img/motion-sensor.png)
-
 
 # Neopixels:
 [Pi5Neo Documentation](https://github.com/vanshksingh/Pi5Neo?tab=readme-ov-file)
@@ -473,7 +508,7 @@ This records a **3-second audio clip** using the PulseAudio interface and saves 
 You can then play it back with:
 `aplay test.wav`
 
-# Enable SPI on Raspberry P
+# Enable SPI on Raspberry Pi
 1. Open Terminal
 2. Run the configuration tool:
    `sudo raspi-config`
@@ -488,6 +523,8 @@ You can then play it back with:
     When prompted, choose Yes to reboot the Pi.
 *(If not prompted, `run sudo reboot`.)*
 
+# IoT Foundational Concepts
+A quick guide to Time Libraries, Resistors, and Transistors in project design.
 
 ## Time Blurb about Time library
 In programming, the time library is used to manage and measure time-related tasks. It provides access to the computer’s system clock, allowing you to track the current time, measure how long code takes to run, pause execution, and format or convert timestamps.
