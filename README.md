@@ -257,9 +257,12 @@ The component shown is a PIR (Passive Infrared) Motion Sensor. It detects moveme
   - [Adafruit MPR121 Capacitive Touch Sensor](https://www.adafruit.com/product/2340)
   - [Python/CircuitPython Setup Guide](https://learn.adafruit.com/adafruit-mpr121-12-key-capacitive-touch-sensor-breakout-tutorial/python-circuitpython)
 
-1. Create Venv and activate
-2. Install https://pypi.org/project/Adafruit-Blinka/ by running `pip install Adafruit-Blinka in venv`
-3. Run `pip3 install adafruit-circuitpython-mpr121` in Venv **DO NOT USE SUDO**
+Note: `Adafruit-Blinka` depends on `lgpio`, which is a system package (not installed in your venv). So, your venv needs to be created with system packages visible.
+1. Ensure lgpio is installed by running `sudo apt install -y python3-lgpio liblgpio1`
+2. Create venv with system packages visible: `python -m venv --system-site-packages myVenv`
+3. Activate Venv: `source /home/techshow1/myVenv/bin/activate`
+4. Install https://pypi.org/project/Adafruit-Blinka/ by running `pip install Adafruit-Blinka` in venv
+5. Run `pip3 install adafruit-circuitpython-mpr121` in Venv **DO NOT USE SUDO**
 
 Example Code:
 ```
