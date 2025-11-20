@@ -1,4 +1,3 @@
-## Table of Contents
 9. [I2C OLED](#i2c-oled)
    1. [Scrolling Test Example for I2C OLED](#scrolling-test-example-for-i2c-oled)
    2. [Putting Images on Device for I2C OLED](#putting-images-on-device-for-i2c-oled)
