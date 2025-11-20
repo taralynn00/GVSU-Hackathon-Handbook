@@ -1,4 +1,3 @@
-## Table of Contents
 12. [How to Automatically Run Scripts When Your Computer Starts](#how-to-automatically-run-scripts-when-your-computer-starts)
 
 
