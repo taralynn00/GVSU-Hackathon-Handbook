@@ -1,4 +1,3 @@
-## Table of Contents
 11. [IoT Foundational Concepts](#iot-foundational-concepts)  
     1.  [Time Blurb About Time Library](#time-blurb-about-time-library)
     2.  [Resistors](#resistors)
