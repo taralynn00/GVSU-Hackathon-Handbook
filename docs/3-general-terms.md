@@ -1,4 +1,4 @@
-## Table of Contents
+
 3. [General Terms](#general-terms)  
 
 
