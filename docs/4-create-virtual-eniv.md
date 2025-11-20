@@ -1,4 +1,3 @@
-## Table of Contents
 4. [Creating a Virtual Environment](#create-virtual-environment)  
 
 
