@@ -1,4 +1,3 @@
-## Table of Contents
 8. [Neopixels](#neopixels)
    1. [Using Pi5Neo in a Virtual Environment](#using-pi5neo-in-a-virtual-environment)
 
