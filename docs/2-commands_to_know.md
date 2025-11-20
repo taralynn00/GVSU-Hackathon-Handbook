@@ -1,4 +1,3 @@
-## Table of Contents
 
 2. [Commands To Know](#commands-to-know)  
 
