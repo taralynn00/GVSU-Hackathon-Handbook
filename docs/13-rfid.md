@@ -1,4 +1,3 @@
-## Table of Contents
 13. [RFID – Using the RC522 Reader on Raspberry Pi 5](#-rfid--using-the-rc522-reader-on-raspberry-pi-5)
     1.  [Hardware Setup](#hardware-setup-do-this-before-installing-software)
     2.  [RC522 → Raspberry Pi 5 Wiring](#-rc522--raspberry-pi-5-wiring)
