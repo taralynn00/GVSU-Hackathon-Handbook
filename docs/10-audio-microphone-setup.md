@@ -1,4 +1,3 @@
-## Table of Contents
 10. [Audio and Microphone Setup](#audio-and-microphone-setup)
     1.  [Enable SPI on Raspberry Pi](#enable-spi-on-raspberry-pi)  
 
