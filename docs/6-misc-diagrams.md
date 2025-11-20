@@ -1,4 +1,3 @@
-## Table of Contents
 6. [Misc. Diagrams](#misc-diagrams)  
    1. [Breadboard Diagram](#breadboard-diagram)
    2. [Button Diagram](#button-diagram)
