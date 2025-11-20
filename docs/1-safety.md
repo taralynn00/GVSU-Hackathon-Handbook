@@ -1,4 +1,3 @@
-## Table of Contents
 1. [Safety](#️-safety)
    1. [Power Supply](#power-supply)
 
