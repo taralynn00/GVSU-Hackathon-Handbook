@@ -1,4 +1,3 @@
-## Table of Contents
 5. [Raspberry Pi Pinout](#raspberry-pi-pinout)  
 
 
