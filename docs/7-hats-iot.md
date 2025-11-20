@@ -1,4 +1,3 @@
-## Table of Contents 
 7. [Hats in IoT Systems](#hats-in-iot-systems)
    1. [Touch-Sense (MPR121) HAT](#touch-sense-mpr121-hat)
    2. [Sense Hat](#sensehat)
