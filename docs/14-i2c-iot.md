@@ -1,4 +1,3 @@
-## Table of Contents
 14. [I²C Communication in IoT Systems](#ic-communication-in-iot-systems)
 
 # I²C Communication in IoT Systems
